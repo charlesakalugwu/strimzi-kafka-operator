@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(StrimziRunner.class)
 @Namespace(KafkaConnectCrdIT.NAMESPACE)
-@Resources(value = "../examples/install/cluster-operator/07-crd-kafka-connect.yaml", asAdmin = true)
+@Resources(value = "../examples/install/cluster-operator/04-crd-kafka-connect.yaml", asAdmin = true)
 public class KafkaConnectCrdIT extends AbstractCrdIT {
     public static final String NAMESPACE = "kafkaconnect-crd-it";
 
