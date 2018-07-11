@@ -43,7 +43,7 @@ spec:
     logging:
       type: inline
       loggers:
-          zookeeper.root.logger: "ERROR"
+          zookeeper.root.logger: "INFO"
     metrics:
       lowercaseOutputName: true
   topicOperator: { }

@@ -275,10 +275,10 @@ public class KafkaAssemblyOperator extends AbstractAssemblyOperator<KubernetesCl
                                     null);
                     StatefulSet ss = kafka.generateStatefulSet(isOpenShift);
                     if (oldKafkaCM != null && !oldKafkaCM.getData().get(ANCILLARY_CM_KEY_LOG_CONFIG).toString().equals(logAndMetricsConfigMap.getData().get(ANCILLARY_CM_KEY_LOG_CONFIG))) {
-                        log.info("Kafka configmap change detected. Restarting pods");
+                        log.debug("Kafka configmap change detected. Restarting pods");
                         ss.getSpec().getTemplate().getMetadata().getAnnotations().put(ANNOTATION_GENERATION, "-1");
                     } else {
-                        log.info("Kafka fresh start");
+                        log.debug("Kafka fresh start");
                     }
 
                     KafkaClusterDescription desc =
@@ -286,7 +286,7 @@ public class KafkaAssemblyOperator extends AbstractAssemblyOperator<KubernetesCl
                                     logAndMetricsConfigMap, ss,
                                     kafka.generateClientsCASecret(), kafka.generateClientsPublicKeySecret(),
                                     kafka.generateBrokersClientsSecret(), kafka.generateBrokersInternalSecret());
-                    oldKafkaCM = kafka.getLogging().getCm();
+                    oldKafkaCM = logAndMetricsConfigMap;
 
                     future.complete(desc);
                 } catch (Throwable e) {
@@ -373,15 +373,15 @@ public class KafkaAssemblyOperator extends AbstractAssemblyOperator<KubernetesCl
                     StatefulSet ss = zk.generateStatefulSet(isOpenShift);
 
                     if (oldZkCM != null && !oldZkCM.getData().get(ANCILLARY_CM_KEY_LOG_CONFIG).toString().equals(logAndMetricsConfigMap.getData().get(ANCILLARY_CM_KEY_LOG_CONFIG))) {
-                        log.info("Zookeeper configmap change detected. Restarting pods");
+                        log.debug("Zookeeper configmap change detected. Restarting pods");
                         ss.getSpec().getTemplate().getMetadata().getAnnotations().put(ANNOTATION_GENERATION, "-1");
                     } else {
-                        log.info("Zookeeper fresh start");
+                        log.debug("Zookeeper fresh start");
                     }
                     ZookeeperClusterDescription desc =
                             new ZookeeperClusterDescription(zk, zk.generateService(), zk.generateHeadlessService(),
                                     logAndMetricsConfigMap, ss, zk.generateNodesSecret());
-                    oldZkCM = zk.getLogging().getCm();
+                    oldZkCM = logAndMetricsConfigMap;
                     future.complete(desc);
                 } catch (Throwable e) {
                     future.fail(e);

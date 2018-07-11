@@ -363,11 +363,7 @@ public class KafkaCluster extends AbstractModel {
             data.put(ANCILLARY_CM_KEY_METRICS, new JsonObject(m).toString());
         }
 
-        ConfigMap configMap = createConfigMap(getAncillaryConfigName(), data);
-        if (getLogging() != null) {
-            getLogging().setCm(configMap);
-        }
-        return configMap;
+        return createConfigMap(getAncillaryConfigName(), data);
     }
 
     /**

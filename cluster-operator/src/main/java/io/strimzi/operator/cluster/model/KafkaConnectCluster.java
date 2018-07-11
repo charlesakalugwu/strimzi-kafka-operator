@@ -153,11 +153,7 @@ public class KafkaConnectCluster extends AbstractModel {
             }
             data.put(ANCILLARY_CM_KEY_METRICS, new JsonObject(m).toString());
         }
-        ConfigMap result = createConfigMap(getAncillaryConfigName(), data);
-        if (getLogging() != null) {
-            getLogging().setCm(result);
-        }
-        return result;
+        return createConfigMap(getAncillaryConfigName(), data);
     }
 
     protected List<ContainerPort> getContainerPortList() {

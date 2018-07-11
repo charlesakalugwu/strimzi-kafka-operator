@@ -232,11 +232,7 @@ public class ZookeeperCluster extends AbstractModel {
     }
 
     public ConfigMap generateMetricsAndLogConfigMap(ConfigMap externalLoggingCm) {
-        ConfigMap result = createConfigMap(getAncillaryConfigName(), getAncillaryCm(externalLoggingCm));
-        if (getLogging() != null) {
-            getLogging().setCm(result);
-        }
-        return result;
+        return createConfigMap(getAncillaryConfigName(), getAncillaryCm(externalLoggingCm));
     }
 
     /**
