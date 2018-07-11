@@ -193,7 +193,7 @@ public class KafkaAssemblyOperatorMockTest {
                 .endSpec()
                 .build();
 
-        CustomResourceDefinition kafkaAssemblyCrd = TestUtils.fromYamlFile("../examples/install/cluster-operator/07-crd-kafka.yaml", CustomResourceDefinition.class);
+        CustomResourceDefinition kafkaAssemblyCrd = TestUtils.fromYamlFile("../examples/install/cluster-operator/04-crd-kafka.yaml", CustomResourceDefinition.class);
 
         mockClient = new MockKube().withCustomResourceDefinition(kafkaAssemblyCrd, KafkaAssembly.class, KafkaAssemblyList.class, DoneableKafkaAssembly.class)
                 .withInitialInstances(Collections.singleton(cluster)).end().build();
